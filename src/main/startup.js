@@ -3,14 +3,23 @@ module.exports = {
   uninstall
 }
 
-var startup = require('user-startup')
+var AutoLaunch = require('auto-launch')
+
+var appLauncher = new AutoLaunch({
+  name: 'WebTorrent Desktop'
+})
 
 function install () {
-  var appPath = process.execPath
-
-  startup.add('webtorrent-desktop', appPath)
+  return appLauncher.isEnabled()
+      .then(function (enabled) {
+        if (enabled) return
+        return appLauncher.enable()
+      })
 }
 
 function uninstall () {
-  startup.remove('webtorrent-desktop')
+  return appLauncher.isEnabled()
+      .then(function (enabled) {
+        if (enabled) return appLauncher.disable()
+      })
 }
