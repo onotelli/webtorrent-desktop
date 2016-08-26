@@ -17,7 +17,7 @@ module.exports = class PrefsController {
       setup: function (cb) {
         // initialize preferences
         state.window.title = 'Preferences'
-        state.unsaved = Object.assign(state.unsaved || {}, {prefs: state.saved.prefs || {}})
+        state.unsaved = Object.assign(state.unsaved || {}, {prefs: Object.assign({}, state.saved.prefs)})
         ipcRenderer.send('setAllowNav', false)
         cb()
       },
