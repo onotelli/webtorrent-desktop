@@ -21,6 +21,9 @@ class PreferencesPage extends React.Component {
 
     this.handleExternalPlayerPathChange =
       this.handleExternalPlayerPathChange.bind(this)
+
+    this.handleStartupChange =
+      this.handleStartupChange.bind(this)
   }
 
   downloadPathSelector () {
@@ -108,6 +111,23 @@ class PreferencesPage extends React.Component {
     )
   }
 
+  handleStartupChange (e, isChecked) {
+    dispatch('updatePreferences', 'startup', isChecked)
+  }
+
+  setStartupCheckbox () {
+     return (
+      <Preference>
+          <Checkbox
+              className='control'
+              checked={this.props.state.unsaved.prefs.startup}
+              label={'Open WebTorrent on startup.'}
+              onCheck={this.handleStartupChange}
+          />
+      </Preference>
+    )
+  }
+
   handleSetDefaultApp () {
     window.alert('TODO')
     // var isFileHandler = state.unsaved.prefs.isFileHandler
@@ -132,6 +152,9 @@ class PreferencesPage extends React.Component {
         </PreferencesSection>
         <PreferencesSection title='Default torrent app'>
           {this.setDefaultAppButton()}
+        </PreferencesSection>
+        <PreferencesSection title='Startup'>
+          {this.setStartupCheckbox()}
         </PreferencesSection>
       </div>
     )
