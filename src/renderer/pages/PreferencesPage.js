@@ -116,14 +116,14 @@ class PreferencesPage extends React.Component {
   }
 
   setStartupCheckbox () {
-     return (
+    return (
       <Preference>
-          <Checkbox
-              className='control'
-              checked={this.props.state.unsaved.prefs.startup}
-              label={'Open WebTorrent on startup.'}
-              onCheck={this.handleStartupChange}
-          />
+        <Checkbox
+          className='control'
+          checked={this.props.state.unsaved.prefs.startup}
+          label={'Open WebTorrent on startup.'}
+          onCheck={this.handleStartupChange}
+        />
       </Preference>
     )
   }
