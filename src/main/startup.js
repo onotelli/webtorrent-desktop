@@ -3,10 +3,11 @@ module.exports = {
   uninstall
 }
 
+var config = require('../config')
 var AutoLaunch = require('auto-launch')
 
 var appLauncher = new AutoLaunch({
-  name: 'WebTorrent Desktop'
+  name: config.APP_NAME
 })
 
 function install () {
