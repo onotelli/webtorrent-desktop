@@ -108,7 +108,7 @@ function setupSavedState (cb) {
       isFileHandler: false,
       openExternalPlayer: false,
       externalPlayerPath: null,
-      startup: true
+      startup: false
     },
     torrents: config.DEFAULT_TORRENTS.map(createTorrentObject),
     version: config.APP_VERSION /* make sure we can upgrade gracefully later */
