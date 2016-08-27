@@ -8,6 +8,7 @@ const PathSelector = require('../components/PathSelector')
 const RaisedButton = require('material-ui/RaisedButton').default
 
 const {dispatch} = require('../lib/dispatcher')
+const config = require('../../config')
 
 class PreferencesPage extends React.Component {
   constructor (props) {
@@ -115,16 +116,22 @@ class PreferencesPage extends React.Component {
     dispatch('updatePreferences', 'startup', isChecked)
   }
 
-  setStartupCheckbox () {
+  setStartupSection () {
+    if (config.IS_PORTABLE) {
+      return
+    }
+
     return (
-      <Preference>
-        <Checkbox
-          className='control'
-          checked={this.props.state.unsaved.prefs.startup}
-          label={'Open WebTorrent on startup.'}
-          onCheck={this.handleStartupChange}
-        />
-      </Preference>
+      <PreferencesSection title='Startup'>
+        <Preference>
+          <Checkbox
+            className='control'
+            checked={this.props.state.unsaved.prefs.startup}
+            label={'Open WebTorrent on startup.'}
+            onCheck={this.handleStartupChange}
+          />
+        </Preference>
+      </PreferencesSection>
     )
   }
 
@@ -153,9 +160,7 @@ class PreferencesPage extends React.Component {
         <PreferencesSection title='Default torrent app'>
           {this.setDefaultAppButton()}
         </PreferencesSection>
-        <PreferencesSection title='Startup'>
-          {this.setStartupCheckbox()}
-        </PreferencesSection>
+        {this.setStartupSection()}
       </div>
     )
   }
